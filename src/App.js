@@ -15,7 +15,7 @@ function App() {
 
       </header>
 
-      <TestMaker> </TestMaker> 
+      <TestMaker/>
 
     </div>
   );

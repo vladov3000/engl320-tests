@@ -1,28 +1,36 @@
 import React from 'react';
-import './form-styles.css'
+import * as textData from './texts.json';
+import { randomProperty } from './utils.js'
 
 class Test extends React.Component{
+
 	constructor(props) {
 		super(props);
 
-		// Generate questions
-		this.state = { questions: []}
+		this.state = { questions: [] }
+
+		let usedTexts = new Set();
 		for (let i = 0; i < parseInt(this.props.questions); i ++) {
-			this.state.questions.push(i);
+			var toAdd = randomProperty(textData.default);
+
+			while (usedTexts.has(toAdd)) { toAdd = randomProperty(textData.default); }
+			usedTexts.add(toAdd);
+
+
+			this.state.questions.push(toAdd);
 		}
 	}
 
 	render () {
 		return (
 			<>
-				<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
-				<ul class="w3-ul w3-border">
+				<ul className="w3-ul w3-border">
 					{this.state.questions.map((t) => 
 						<li> {t} </li>
 						)}
 				</ul>
 			</>
-			);
+		);
 	}
 }
 

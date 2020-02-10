@@ -1,86 +1,23 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
-import styled from "@emotion/styled";
-import './form-styles.css';
 import './App.css';
+
+import * as textData from './texts.json';
+import { getMaxQuestions } from './utils.js'
 
 import Test from './Test.js';
 
-const MyTextInput = ({ label, ...props }) => {
-  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-  // which we can spread on <input> and alse replace ErrorMessage entirely.
-  const [field, meta] = useField(props);
-  return (
-    <>
-      <label htmlFor={props.id || props.name}>{label}</label>
-      <input className="text-input" {...field} {...props} />
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
-    </>
-  );
-};
-
-const MyNumInput = ({ label, ...props }) => {
-  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-  // which we can spread on <input> and alse replace ErrorMessage entirely.
-  const [field, meta] = useField(props);
-  return (
-    <>
-      <label htmlFor={props.id || props.name}>{label}</label>
-      <input className="number-input" {...field} {...props} />
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
-    </>
-  );
-};
-
-const MyCheckbox = ({ children, ...props }) => {
-  const [field, meta] = useField({ ...props, type: "checkbox" });
-  return (
-    <>
-      <label className="checkbox">
-        <input {...field} {...props} type="checkbox" />
-        {children}
-      </label>
-      {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
-      ) : null}
-    </>
-  );
-};
-
-// Styled components ....
-const StyledSelect = styled.select`
-  color: var(--blue);
-`;
-
-const StyledErrorMessage = styled.div`
-  font-size: 12px;
-  color: var(--red-600);
-  width: 400px;
-  margin-top: 0.25rem;
-  &:before {
-    content: "❌ ";
-    font-size: 10px;
-  }
-  @media (prefers-color-scheme: dark) {
-    color: var(--red-300);
-  }
-`;
-
-const StyledLabel = styled.label`
-  margin-top: 1rem;
-`;
-
 class TestMaker extends React.Component {
 
-	constructor (props) {
+	constructor(props) {
 		super(props);
-
 		this.state = {test : null};
 	}
+
+	onMakeSubmit = (numQuestions) => {
+		this.setState({test: null});
+		this.setState({test: <Test questions={numQuestions}/>});
+	};
 
 	render() {
 		return (
@@ -91,26 +28,52 @@ class TestMaker extends React.Component {
 			          const errors = {};
 
 			          if (values.questions < 1) {
-			          	errors.questions = 'Practice test must contain more than 1 question.';
+			          	errors.questions = 'Practice test must contain at least 1 question.';
+			          }
+			          if (values.questions > getMaxQuestions()) {
+			          	errors.questions = 'Practice test can only have a maximum of ' + getMaxQuestions() + ' questions';
 			          }
 
 			          return errors;
 			        }}
 			        onSubmit={(values, { setSubmitting }) => {
 			          setTimeout(() => {
-			            this.setState({test : <Test questions={values.questions}/>});
+			            this.onMakeSubmit(values.questions);
 			            setSubmitting(false);
 			          }, 400);
 			        }}
-			      >
-			        {({ isSubmitting }) => (
+			    >
+			        {( props ) => (
 			          <Form>
-			          	<MyNumInput label = "Number of Questions"
-			          				name = "questions"
-			          				type = "number"/>
-			            <button type="submit" disabled={isSubmitting}>
-			              Submit
-			            </button>
+			          	<div className="Maker-Box w3-container w3-card-4 w3-light-grey">
+			          		<h2>Create a New Test</h2>
+			          		<p> Select the parameters and press submit when done.</p>
+
+			          		<p> 
+				          		<label>Number of Questions</label>
+					          	<input 
+					          		className="w3-input w3-border"
+					          		type="number"
+						          	onChange={props.handleChange}
+						            onBlur={props.handleBlur}
+						            value={props.values.name}
+						            name="questions"
+					          	/>
+					          	<div className="ErrorMsg">
+					          		<ErrorMessage name="questions"/> 
+					          	</div>
+				          	</p>
+
+				            <p> 
+					            <button 
+					            	className="w3-input w3-border"
+					            	type="submit" 
+					            	disabled={props.isSubmitting}
+					            >
+					              Submit
+					            </button> 
+				            </p>
+			            </div>
 			          </Form>
 			        )}
 	      		</Formik>
