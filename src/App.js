@@ -1,23 +1,22 @@
 import React from 'react';
-import './App.css';
+import './app-src/App.css';
 
-import TestMaker from './TestMaker';
-import Test from './Test';
+import TestMaker from './app-src/TestMaker';
+import Test from './app-src/Test';
 
 function App() {
   return (
-    <div className="App">
+    <>
       <header className="App-header">
-
-        <h1>
-          Welcome to Test Generator for ENGL 320
-        </h1>
-
+        <h1> Welcome to Test Generator for ENGL 320 </h1>
       </header>
 
-      <TestMaker/>
+      <div className="App">
 
-    </div>
+        <TestMaker/>
+
+      </div>
+    </>
   );
 }
 

@@ -23,13 +23,13 @@ class Test extends React.Component{
 
 	render () {
 		return (
-			<>
-				<ul className="w3-ul w3-border">
+			<div className="Test-Box w3-container w3-card-4 w3-light-grey">
+				<ul className="w3-ul w3-border w3-white">
 					{this.state.questions.map((t) => 
 						<li> {t} </li>
 						)}
 				</ul>
-			</>
+			</div>
 		);
 	}
 }
