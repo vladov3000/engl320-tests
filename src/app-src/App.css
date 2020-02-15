@@ -37,9 +37,13 @@
 
 .Test-Box {
   padding: 2%;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
 }
 
 .Word-Bank {
-  margin-bottom: 1%;
+  margin-bottom: 2%;
+}
+
+.Question-Table {
+  margin-bottom: 2%;
 }

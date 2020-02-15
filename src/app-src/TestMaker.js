@@ -22,7 +22,7 @@ class TestMaker extends React.Component {
 	render() {
 		return (
 			<>
-				<Formik className="Gen-settings"
+				<Formik
 			        initialValues={{ questions: 10}}
 			        validate={values => {
 			          const errors = {};

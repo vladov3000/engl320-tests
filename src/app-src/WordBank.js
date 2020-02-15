@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
+import { intToChar } from './utils.js';
 
 class WordBank extends React.Component {
 
 	constructor(props) {
 		super(props);
 
-		this.state = { words: this.props.words, table:"" };
+		this.state = { words: this.props.words.slice(), table:"" };
 		this.state.words.sort();
 
 
@@ -18,8 +19,8 @@ class WordBank extends React.Component {
 				<h2> Available Titles: </h2>
 				<table className="w3-table">
 					<tr>
-						{[...Array(5).keys()].map((i) =>
-							<td> {String.fromCharCode('A'.charCodeAt(0) + i)+'.'} {this.state.words[i]}</td>
+						{[...Array(this.state.words.length).keys()].map((i) =>
+							<td> {intToChar(i)+'.'} {this.state.words[i]}</td>
 						)}
 					</tr>
 				</table>
