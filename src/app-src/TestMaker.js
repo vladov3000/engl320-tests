@@ -47,7 +47,6 @@ class TestMaker extends React.Component {
 			          <Form>
 			          	<div className="Maker-Box w3-container w3-card-4 w3-light-grey">
 			          		<h2>Create a New Test</h2>
-			          		<p> Select the parameters and press submit when done.</p>
 
 			          		<p> 
 				          		<label>Number of Questions</label>
@@ -59,7 +58,7 @@ class TestMaker extends React.Component {
 						            value={props.values.name}
 						            name="questions"
 					          	/>
-					          	<div className="ErrorMsg">
+					          	<div className="Error-Msg">
 					          		<ErrorMessage name="questions"/> 
 					          	</div>
 				          	</p>
@@ -70,7 +69,7 @@ class TestMaker extends React.Component {
 					            	type="submit" 
 					            	disabled={props.isSubmitting}
 					            >
-					              Submit
+					              Generate Test
 					            </button> 
 				            </p>
 			            </div>

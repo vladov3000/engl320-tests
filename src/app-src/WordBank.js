@@ -18,8 +18,8 @@ class WordBank extends React.Component {
 				<h2> Available Titles: </h2>
 				<table className="w3-table">
 					<tr>
-						{this.state.words.map((w) => 
-								<td> {w} </td>
+						{[...Array(5).keys()].map((i) =>
+							<td> {String.fromCharCode('A'.charCodeAt(0) + i)+'.'} {this.state.words[i]}</td>
 						)}
 					</tr>
 				</table>
