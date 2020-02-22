@@ -1,11 +1,13 @@
 import * as textData from './texts.json';
 
 export function getMaxQuestions() {
+	// returns amount of titles in texts.json
+
 	return Object.keys(textData.default).length;
 }
 
 export function randomProperty(obj) {
-	// returns random property of obj
+	// returns key to random property of obj
 
     var keys = Object.keys(obj);
     return keys[ keys.length * Math.random() << 0];

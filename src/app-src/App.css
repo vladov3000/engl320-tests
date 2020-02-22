@@ -47,3 +47,15 @@
 .Question-Table {
   margin-bottom: 2%;
 }
+
+.Not-Checked {
+
+}
+
+.Correct {
+  background-color: rgba(0, 255, 0, 0.3);
+}
+
+.Incorrect {
+  background-color: rgba(255, 0, 0, 0.3);
+}

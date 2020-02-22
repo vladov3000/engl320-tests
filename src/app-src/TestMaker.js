@@ -23,7 +23,7 @@ class TestMaker extends React.Component {
 		return (
 			<>
 				<Formik
-			        initialValues={{ questions: 10}}
+			        initialValues={{ questions: 0}}
 			        validate={values => {
 			          const errors = {};
 
