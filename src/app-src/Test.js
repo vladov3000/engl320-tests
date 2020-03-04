@@ -93,7 +93,7 @@ class Test extends React.Component{
 										        }
 										        {q.correct != "Not-Checked" &&
 										        	<>
-										        		Correct Answer:{q.answer}
+										        		Correct Answer: <b> {q.answer} </b>
 										        	</>
 										        }
 									        </div>
