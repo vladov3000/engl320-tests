@@ -1,5 +1,5 @@
 # base image
-FROM node:12.3.1-alpine
+FROM node:12.4.0-alpine
 
 RUN echo "0.1" > /version
 
