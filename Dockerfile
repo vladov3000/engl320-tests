@@ -16,7 +16,7 @@ COPY /public /engl320-tests/public
 RUN npm install --silent
 RUN npm install react-scripts -g --silent
 RUN npm install serve -g --silent
-RUN npm run-script build
+RUN npm run-script build --silent
 
 #website works on port 3000 inside the container
 EXPOSE 3000
