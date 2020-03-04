@@ -1,9 +1,6 @@
 # This script is used for converting the texts to a JSON string that can be copy pasted into ../src/app-src/texts.json
 # Note: cannot take input from python shell, so run using "python3 format_text.py" from command line
 
-import subprocess
-
-
 def convert_to_single():
     """
     Interactive program where user inputs multi line string.
