@@ -14,16 +14,16 @@ class TestMaker extends React.Component {
 		this.state = {test : null};
 	}
 
-	onMakeSubmit = (numQuestions) => {
+	onMakeSubmit = (numQuestions, numLines) => {
 		this.setState({test: null});
-		this.setState({test: <Test questions={numQuestions}/>});
+		this.setState({test: <Test questions={numQuestions} lines={numLines}/>});
 	};
 
 	render() {
 		return (
 			<>
 				<Formik
-			        initialValues={{ questions: 0}}
+			        initialValues={{ questions: 5, lines: 5}}
 			        validate={values => {
 			          const errors = {};
 
@@ -38,7 +38,7 @@ class TestMaker extends React.Component {
 			        }}
 			        onSubmit={(values, { setSubmitting }) => {
 			          setTimeout(() => {
-			            this.onMakeSubmit(values.questions);
+			            this.onMakeSubmit(values.questions, values.lines);
 			            setSubmitting(false);
 			          }, 400);
 			        }}
@@ -48,22 +48,37 @@ class TestMaker extends React.Component {
 			          	<div className="Maker-Box w3-container w3-card-4 w3-light-grey">
 			          		<h2>Create a New Test</h2>
 
-			          		<p> 
+			          		<> 
 				          		<label>Number of Questions</label>
 					          	<input 
 					          		className="w3-input w3-border"
 					          		type="number"
 						          	onChange={props.handleChange}
 						            onBlur={props.handleBlur}
-						            value={props.values.name}
+						            value={props.values.questions}
 						            name="questions"
 					          	/>
 					          	<div className="Error-Msg">
 					          		<ErrorMessage name="questions"/> 
 					          	</div>
-				          	</p>
+				          	</>
 
-				            <p> 
+				          	<> 
+				          		<label>Number of Lines</label>
+					          	<input 
+					          		className="w3-input w3-border"
+					          		type="number"
+						          	onChange={props.handleChange}
+						            onBlur={props.handleBlur}
+						            value={props.initialValues.lines}
+						            name="lines"
+					          	/>
+					          	<div className="Error-Msg">
+					          		<ErrorMessage name="lines"/> 
+					          	</div>
+				          	</>
+
+				            <> 
 					            <button 
 					            	className="w3-input w3-border"
 					            	type="submit" 
@@ -71,7 +86,7 @@ class TestMaker extends React.Component {
 					            >
 					              Generate Test
 					            </button> 
-				            </p>
+				            </>
 			            </div>
 			          </Form>
 			        )}

@@ -20,7 +20,7 @@ class WordBank extends React.Component {
 					<h2> Available Titles: </h2>
 					<div className="Word-Bank">
 						{[...Array(this.state.words.length).keys()].map((i) =>
-								<div className="Word-Bank-Item Formatted-String"> 
+								<div key={i} className="Word-Bank-Item Formatted-String"> 
 									{intToChar(i)+'. ' + this.state.words[i]}
 								</div>
 						)}

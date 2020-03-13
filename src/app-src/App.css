@@ -35,6 +35,10 @@
   padding-bottom: 1%;
 }
 
+.Maker-Box * {
+  padding-bottom: 2%;
+}
+
 .Test-Box {
   padding: 2%;
   margin-bottom: 1%;

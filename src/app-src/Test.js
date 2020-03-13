@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage, useField } from 'formik';
 import { default as textData } from './texts.json';
-import { randomProperty, intToChar } from './utils.js';
+import { randomProperty, intToChar, getOccurences, getPosition } from './utils.js';
 
 import WordBank from './WordBank.js';
 
@@ -16,11 +16,23 @@ class Test extends React.Component{
 		let usedTexts = new Set();
 		for (let i = 0; i < parseInt(this.props.questions); i ++) {
 
+			// find title we haven't used yet
 			let tempTitle = randomProperty(textData)
 			while (usedTexts.has(tempTitle)) { tempTitle = randomProperty(textData); }
 			usedTexts.add(tempTitle);
 
-			let toAdd = { title: tempTitle, correct: "Not-Checked", contents: textData.tempTitle};
+			// pick which lines we are going to use
+			let tempContents = textData[tempTitle];
+			let totalLines = getOccurences(tempContents, '\n') - this.props.lines;
+			if (totalLines > 0) {
+				let startLine = totalLines * Math.random() << 0;
+				let endLine = startLine + this.props.lines;
+				tempContents = tempContents.slice(getPosition(tempContents, '\n', startLine),
+					getPosition(tempContents, '\n', endLine));
+			}
+
+			// add it to questions
+			let toAdd = { title: tempTitle, correct: "Not-Checked", contents: tempContents};
 			this.state.questions.push(toAdd);
 		}
 
@@ -34,11 +46,8 @@ class Test extends React.Component{
 	}
 
 	onTestSubmit(answers) {
-		// alert(JSON.stringify(this.state.questions));
-		// alert(JSON.stringify(answers));
-
 		let newQuestions = this.state.questions.map((q) => {
-			if (q.answer == answers[q.title]) {
+			if (q.answer === answers[q.title]) {
 				q.correct = "Correct";
 			} else {
 				q.correct = "Incorrect";
@@ -74,9 +83,9 @@ class Test extends React.Component{
 							<ul className="w3-ul w3-border w3-white Question-Table">
 								{this.state.questions.map((q) => 
 									<li className={"w3-row " + q.correct}>
-											<div className="w3-col s6 w3-center Formatted-String"> {textData[q.title]} </div>
+											<div className="w3-col s6 w3-center Formatted-String"> {q.contents} </div>
 											<div className="w3-col s6 w3-center"> 
-												{q.correct == "Not-Checked" &&
+												{q.correct === "Not-Checked" &&
 													<select 
 										          		className="w3-border w3-select"
 										          		type="select"
@@ -87,11 +96,11 @@ class Test extends React.Component{
 											            style={{"width":"10%"}}
 										          	>
 										          		{[...Array(this.state.questions.length).keys()].map((i) =>
-										          			<option value={intToChar(i)}> {intToChar(i)} </option>
+										          			<option id={i} value={intToChar(i)}> {intToChar(i)} </option>
 										          		)}				          		
 										          	</select>
 										        }
-										        {q.correct != "Not-Checked" &&
+										        {q.correct !== "Not-Checked" &&
 										        	<>
 										        		Correct Answer: <b> {q.answer} </b>
 										        	</>
