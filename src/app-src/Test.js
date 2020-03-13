@@ -74,7 +74,7 @@ class Test extends React.Component{
 							<ul className="w3-ul w3-border w3-white Question-Table">
 								{this.state.questions.map((q) => 
 									<li className={"w3-row " + q.correct}>
-											<div className="w3-col s6 w3-center" style={{"white-space":"pre-wrap"}}> {textData[q.title]} </div>
+											<div className="w3-col s6 w3-center Formatted-String"> {textData[q.title]} </div>
 											<div className="w3-col s6 w3-center"> 
 												{q.correct == "Not-Checked" &&
 													<select 

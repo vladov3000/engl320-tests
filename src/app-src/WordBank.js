@@ -15,20 +15,29 @@ class WordBank extends React.Component {
 
 	render() {
 		return (
-			<div className="w3-border w3-white Word-Bank">
-				<h2> Available Titles: </h2>
-				<table className="w3-table">
-					<tr>
+			<>
+				<div className="w3-border w3-white Word-Box">
+					<h2> Available Titles: </h2>
+					<div className="Word-Bank">
 						{[...Array(this.state.words.length).keys()].map((i) =>
-							<td> 
-								<p className="Formatted-String" style={{"white-space":"pre-wrap"}}> 
+								<div className="Word-Bank-Item Formatted-String"> 
 									{intToChar(i)+'. ' + this.state.words[i]}
-								</p>
-							</td>
+								</div>
 						)}
-					</tr>
-				</table>
-			</div>
+					</div>
+					{/*
+					<table className="w3-table">
+						<tr>
+							{[...Array(this.state.words.length).keys()].map((i) =>
+								<td className="Formatted-String"> 
+									{intToChar(i)+'. ' + this.state.words[i]}
+								</td>
+							)}
+						</tr>
+					</table>
+					*/}
+				</div>
+			</>
 		);
 	}
 }

@@ -40,8 +40,19 @@
   margin-bottom: 1%;
 }
 
-.Word-Bank {
+.Word-Box {
   margin-bottom: 2%;
+}
+
+.Word-Bank {
+  margin-bottom: 1%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Word-Bank .Word-Bank-Item {
+  flex-basis: 25%;
+  padding: 1%;
 }
 
 .Question-Table {
@@ -49,7 +60,7 @@
 }
 
 .Formatted-String {
-  white-space: "pre-wrap";
+  white-space: pre-wrap;
 }
 
 .Not-Checked {
