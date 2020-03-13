@@ -1,5 +1,6 @@
 # base image
 FROM node:12.2.0-alpine
+MAINTAINER vladov3000@gmail.com
 
 RUN echo "0.1" > /version
 
@@ -18,4 +19,5 @@ RUN npm install react-scripts@3.0.1 -g --silent
 EXPOSE 3000
 
 #code runs when we start container
-ENTRYPOINT ["npm", "run","watch"]
+ENTRYPOINT ["npm", "run", "build"]
+ENTRYPOINT ["serve", "-s", "build", "-l", "4000"]
