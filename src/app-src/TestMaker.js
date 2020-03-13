@@ -33,6 +33,9 @@ class TestMaker extends React.Component {
 			          if (values.questions > getMaxQuestions()) {
 			          	errors.questions = 'Practice test can only have a maximum of ' + getMaxQuestions() + ' questions';
 			          }
+			          if (values.lines < 1) {
+			          	errors.lines = 'Practice test must contain at least 1 line of text for each question.';
+			          }
 
 			          return errors;
 			        }}
@@ -48,9 +51,9 @@ class TestMaker extends React.Component {
 			          	<div className="Maker-Box w3-container w3-card-4 w3-light-grey">
 			          		<h2>Create a New Test</h2>
 
-			          		<> 
+			          		<div> 
 				          		<label>Number of Questions</label>
-					          	<input 
+					          	<Field 
 					          		className="w3-input w3-border"
 					          		type="number"
 						          	onChange={props.handleChange}
@@ -61,24 +64,24 @@ class TestMaker extends React.Component {
 					          	<div className="Error-Msg">
 					          		<ErrorMessage name="questions"/> 
 					          	</div>
-				          	</>
+				          	</div>
 
-				          	<> 
+				          	<div> 
 				          		<label>Number of Lines</label>
-					          	<input 
+					          	<Field 
 					          		className="w3-input w3-border"
 					          		type="number"
 						          	onChange={props.handleChange}
 						            onBlur={props.handleBlur}
-						            value={props.initialValues.lines}
+						            value={props.values.lines}
 						            name="lines"
 					          	/>
 					          	<div className="Error-Msg">
 					          		<ErrorMessage name="lines"/> 
 					          	</div>
-				          	</>
+				          	</div>
 
-				            <> 
+				            <div> 
 					            <button 
 					            	className="w3-input w3-border"
 					            	type="submit" 
@@ -86,7 +89,7 @@ class TestMaker extends React.Component {
 					            >
 					              Generate Test
 					            </button> 
-				            </>
+				            </div>
 			            </div>
 			          </Form>
 			        )}

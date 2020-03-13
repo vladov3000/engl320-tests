@@ -27,7 +27,7 @@ class Test extends React.Component{
 			if (totalLines > 0) {
 				let startLine = totalLines * Math.random() << 0;
 				let endLine = startLine + this.props.lines;
-				tempContents = tempContents.slice(getPosition(tempContents, '\n', startLine),
+				tempContents = tempContents.slice(getPosition(tempContents, '\n', startLine) + 1,
 					getPosition(tempContents, '\n', endLine));
 			}
 
@@ -83,8 +83,8 @@ class Test extends React.Component{
 							<ul className="w3-ul w3-border w3-white Question-Table">
 								{this.state.questions.map((q) => 
 									<li className={"w3-row " + q.correct}>
-											<div className="w3-col s6 w3-center Formatted-String"> {q.contents} </div>
-											<div className="w3-col s6 w3-center"> 
+											<div className="w3-col s9 w3-center Formatted-String"> {q.contents} </div>
+											<div className="w3-col s3 w3-center"> 
 												{q.correct === "Not-Checked" &&
 													<select 
 										          		className="w3-border w3-select"
@@ -93,7 +93,7 @@ class Test extends React.Component{
 											            onBlur={props.handleBlur}
 											            value={props.values.name}
 											            name={q.title}
-											            style={{"width":"10%"}}
+											            style={{"width":"40px"}}
 										          	>
 										          		{[...Array(this.state.questions.length).keys()].map((i) =>
 										          			<option id={i} value={intToChar(i)}> {intToChar(i)} </option>
