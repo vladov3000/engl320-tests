@@ -20,7 +20,11 @@ class WordBank extends React.Component {
 				<table className="w3-table">
 					<tr>
 						{[...Array(this.state.words.length).keys()].map((i) =>
-							<td> {intToChar(i)+'.'} {this.state.words[i]}</td>
+							<td> 
+								<p className="Formatted-String" style={{"white-space":"pre-wrap"}}> 
+									{intToChar(i)+'. ' + this.state.words[i]}
+								</p>
+							</td>
 						)}
 					</tr>
 				</table>

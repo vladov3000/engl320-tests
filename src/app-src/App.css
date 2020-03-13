@@ -48,6 +48,10 @@
   margin-bottom: 2%;
 }
 
+.Formatted-String {
+  white-space: "pre-wrap";
+}
+
 .Not-Checked {
 
 }
