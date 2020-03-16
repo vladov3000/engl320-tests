@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build . -t engl320-tests
+docker build . -t engl320-tests:latest
