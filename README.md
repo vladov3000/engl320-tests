@@ -1,11 +1,14 @@
 # engl320-tests
 
-This is a simple test generator for ENGL 320 tests, but it can be easily generalized for other purposes.
+This is a simple test generator for ENGL 320 tests, but it can be easily generalized for other purposes. The test contains a test generation form, which takes user input on how many questions to create and how much lines of each text to includ. Using this information, the app generates a submittable test with a word bank and several passages. The user matches the given passages to the titles in the word bank and submits to see their results.
+
+Link to [web app](http://vladov3000.com:8080)
 
 ## Requirements
 
 1. Node
 2. React
+3. Formik
 3. Docker (for deployment)
 
 ### Node Installation
@@ -57,7 +60,13 @@ Confirm the installation by running the following:
 
     $ npm list react
     engl320-tests@0.1.0 /Users/vlad/Projects/engl320-tests
-    └── react@16.12.0 
+    └── react@16.12.0
+    
+### Formik Installation
+
+Use node to install Formik:
+
+    $ npm install formik --save
     
 ### Docker Installation
 
@@ -76,4 +85,59 @@ Docker installation instructions are specific to each operating system and can b
     This message shows that your installation appears to be working correctly.
     [information about how docker gets and runs the hello-world image]
 
+## Development
+
+This code can be easily repurposed for other types of tests, so cloning or forking this github project is encouraged. Before, you begin adding code, it is good to familiarize yourself with the structure of the project.
+
+### Project Layout
+
+Most of the project is folders and files generated from the React project inialization ```npx create-react-app my-app```. These contain code useful for debugging and other development shortcuts, so messing with them is not reccomended. The notable folders/files that are not part of the deafult initialization are:
+
+    1. `./src/app-src`
+    2. `./scripts`
+    3. `./docker`
+    4. `Dockerfile`
     
+ #### App-src
+ 
+ This contains all the javascript React code for the web app as well as the JSON file that maps the title of texts to their passages. This is where you should create new React components (as individual javascript files to be organized) and add new files. To make your components visible, you will have to export them and add them to `./src/App.js`.
+ 
+ #### Scripts
+ 
+ This contains miscellaneous code useful for development. Currently, it contains one python script that I used to convert the text pdfs to a one-line string with escape characters for JSON.
+ 
+ #### Docker and Dockerfile
+ 
+  This directory will be covered thoroughly in the deployment section.
+ 
+ ### Running in Development Mode
+ 
+ To run the react app locally in development mode enter:
+ 
+        npm run start
+        
+ Now, you can access the app from [localhost:3000](http://localhost:3000). The webpage will refresh and update as you make changes in the react app.
+ 
+ ### Explanation of Code
+ 
+  TestMaker.js contains the React component TestMaker, which encapsulates all the react components in the app. Test has a Formik component, which is what process the user's parameter and creates the Test component found in Test.js (this is appended as a child of TestMaker). Then, Test has an init method that generates an object that represents the test (`this.state.questions`) using the props `this.props.questions` and `this.props.lines`, which are the number of questions and number of lines, respectively. The JSON representation of `this.state.questions` is as follows:
+  
+    [
+        {
+            title: "Canterbury Tales: \n\t General Prologue}
+            correct: "Not-Checked" // this dictates the style of the questions, value can also be "Correct" and "Incorrect"
+            contents: "When that April with his showers sweet\n ... \n ... \n"// lines of text as string to render
+            answer: "A" // multiple choice answer, each question has unique value
+        },
+        // more questions repeated here
+    ]
+    
+In the `render()` method for Test, a Word Bank(found in WordBank.js) is generated using the titles of the texts where the letter answer for each title corresponds to the position of the title when sorted alphabetically. Then, Formik is used again to handle the submission of the test. The questions are rendered inside this component and the `OnTestSubmit()` method handles the submission. I would reccend looking at the [Getting Started](https://jaredpalmer.com/formik/docs/overview) page of Formik to understand its purpose and parameters more.
+  
+  
+  
+  
+  
+  
+  
+  
