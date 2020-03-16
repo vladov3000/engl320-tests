@@ -1,6 +1,6 @@
 # engl320-tests
 
-This is a simple test generator for ENGL 320 tests, but it can be easily generalized for other purposes. The test contains a test generation form, which takes user input on how many questions to create and how much lines of each text to includ. Using this information, the app generates a submittable test with a word bank and several passages. The user matches the given passages to the titles in the word bank and submits to see their results.
+This is a simple test generator for ENGL 320 tests, but it can be easily generalized for other purposes. The test contains a test generation form, which takes user input on how many questions to create and how much lines of each text to include. Using this information, the app generates a submittable test with a word bank and several passages. The user matches the given passages to the titles in the word bank and submits to see their results.
 
 Link to [web app](http://vladov3000.com:8080)
 
