@@ -108,7 +108,7 @@ Most of the project is folders and files generated from the React project iniali
  
  #### Docker and Dockerfile
  
-  This directory will be covered thoroughly in the deployment section.
+  The Dockerfile is used by `./docker/make_container.sh` to make a docker image and `./docker/start_container` runs it. A more detailed description of the parameters can be found in the Deployment section of this README.
  
  ### Running in Development Mode
  
@@ -132,12 +132,29 @@ Most of the project is folders and files generated from the React project iniali
         // more questions repeated here
     ]
     
-In the `render()` method for Test, a Word Bank(found in WordBank.js) is generated using the titles of the texts where the letter answer for each title corresponds to the position of the title when sorted alphabetically. Then, Formik is used again to handle the submission of the test. The questions are rendered inside this component and the `OnTestSubmit()` method handles the submission. I would reccend looking at the [Getting Started](https://jaredpalmer.com/formik/docs/overview) page of Formik to understand its purpose and parameters more.
-  
-  
-  
-  
-  
-  
+In the `render()` method for Test, a Word Bank(found in WordBank.js) is generated using the titles of the texts where the letter answer for each title corresponds to the position of the title when sorted alphabetically. Then, Formik is used again to handle the submission of the test. The questions are rendered inside this component and the `OnTestSubmit()` method handles the submission. I would recommend looking at the [Getting Started](https://jaredpalmer.com/formik/docs/overview) page of Formik to understand its purpose and parameters more. `src/app-src/App.css` contains the styling for all the components in the app (not to be confused with `src/App.css`), and texts.json contains JSON that maps each title to a string wit the full text in it.
+
+## Deployment
+
+To deploy onto a server, make sure docker is installed. Then, build the docker image by running
+
+    $ chmod +x ./docker/make_container.sh
+    $ ./docker/make_container.sh
+    
+To run the image:
+
+    $ chmod +x ./docker/start_container.sh
+    $ ./docker/start_container.sh [PORT THAT APP WILL RUN ON - DEFAULT is 8080]
+
+The container (but not the image) will be deleted after the run, so there is no clutter. [Tmux](https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/) is a good window manager that can help with running the docker container as a background process.
+
+### Docker Development
+
+Modify the Dockerfile to add new dependencies, and change the parameters in the make and run script to affect the ways the image is built and run.
+
+
+## Contact
+
+If you have any further questions, feel free to reach out to vladov@uw.edu.
   
   
