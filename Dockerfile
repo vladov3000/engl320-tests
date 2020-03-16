@@ -1,5 +1,6 @@
 # base image
 FROM node:12.4.0-alpine
+MAINTAINER vladov3000@gmail.com
 
 RUN echo "0.1" > /version
 
